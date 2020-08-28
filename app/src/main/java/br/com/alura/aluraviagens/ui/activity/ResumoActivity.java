@@ -1,5 +1,6 @@
 package br.com.alura.aluraviagens.ui.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,8 +27,14 @@ public class ResumoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resumo);
 
         setTitle(TITULO_APPBAR);
+        Pacote pacoteSaoPaulo;
+        Intent intent = getIntent();
+        if(intent.hasExtra("pacoteSelecionado")){
+            pacoteSaoPaulo = (Pacote) intent.getSerializableExtra("pacoteSelecionado");
+        } else {
+            pacoteSaoPaulo = new Pacote("São Paulo", "sao_paulo_sp", 2, new BigDecimal("243.99"));
+        }
 
-        Pacote pacoteSaoPaulo = new Pacote("São Paulo", "sao_paulo_sp", 2, new BigDecimal("243.99"));
 
         TextView local = findViewById(R.id.resumo_pacote_local);
         local.setText(pacoteSaoPaulo.getLocal());

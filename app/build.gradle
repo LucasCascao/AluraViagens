@@ -16,6 +16,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+task teste() {
+    ext.teste=true
+    println(ext.teste)
+    doLast {
+        ant.propertyfile(file: "../gradle.properties") {
+            entry(key: "wasPublished", value: ext.teste)
+        }
+    }
 }
 
 dependencies {
