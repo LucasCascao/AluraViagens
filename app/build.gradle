@@ -27,7 +27,7 @@ android {
 
 task('copyAPK', type: Copy) {
     from 'build/outputs/apk/debug'
-    into 'build/artifacts'
+    into '/home/lucas.rama/develop/teste-apk'
 //    exclude '**/app*'
 }
 //task teste {

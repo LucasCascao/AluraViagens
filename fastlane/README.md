@@ -26,6 +26,11 @@ Runs all the tests
 fastlane android debug_test
 ```
 
+### android copy_test
+```
+fastlane android copy_test
+```
+
 ### android beta
 ```
 fastlane android beta

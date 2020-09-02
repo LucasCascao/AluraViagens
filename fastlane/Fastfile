@@ -22,7 +22,7 @@ platform :android do
   end
 
   lane :debug_test do
-    gradle(task: "installDebug")
+    gradle(task: "assembleDebug")
   end
 
   lane :copy_test do
