@@ -21,17 +21,21 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+
 }
 
-task teste() {
-    ext.teste=true
-    println(ext.teste)
-    doLast {
-        ant.propertyfile(file: "../gradle.properties") {
-            entry(key: "wasPublished", value: ext.teste)
-        }
-    }
+task('copyAPK', type: Copy) {
+    from 'build/outputs/apk/debug'
+    into 'build/artifacts'
+//    exclude '**/app*'
 }
+//task teste {
+//    Boolean apkExists = file("build/outputs/apk/debug/app-debug.apk").exists()
+//    println apkExists
+//}
+
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

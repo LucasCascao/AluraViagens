@@ -25,6 +25,10 @@ platform :android do
     gradle(task: "installDebug")
   end
 
+  lane :copy_test do
+    gradle(task: "copyAPK")
+  end
+
   desc "Submit a new Beta Build to Crashlytics Beta"
   lane :beta do
     gradle(task: "clean assembleRelease")
