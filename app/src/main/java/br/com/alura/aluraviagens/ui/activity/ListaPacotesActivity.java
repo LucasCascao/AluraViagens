@@ -36,7 +36,7 @@ public class ListaPacotesActivity extends AppCompatActivity {
         listaDePacotes.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(this, ResumoActivity.class);
             intent.putExtra("pacoteSelecionado", pacotes.get(position));
-            startActivity(new Intent(this, ResumoActivity.class));
+            startActivity(intent);
         });
     }
 }

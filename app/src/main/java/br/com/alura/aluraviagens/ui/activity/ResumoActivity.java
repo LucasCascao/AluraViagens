@@ -1,16 +1,13 @@
 package br.com.alura.aluraviagens.ui.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import br.com.alura.aluraviagens.R;
 import br.com.alura.aluraviagens.model.Pacote;
@@ -22,6 +19,7 @@ import br.com.alura.aluraviagens.util.ResourceUtil;
 public class ResumoActivity extends AppCompatActivity {
 
     public static final String TITULO_APPBAR = "Resumo do Pacote";
+    private Pacote pacote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,29 +27,35 @@ public class ResumoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resumo);
 
         setTitle(TITULO_APPBAR);
-        Pacote pacoteSaoPaulo;
-        Intent intent = getIntent();
-        if(intent.hasExtra("pacoteSelecionado")){
-            pacoteSaoPaulo = (Pacote) intent.getSerializableExtra("pacoteSelecionado");
-        } else {
-            pacoteSaoPaulo = new Pacote("São Paulo", "sao_paulo_sp", 2, new BigDecimal("243.99"));
-        }
 
-        mostraLocal(pacoteSaoPaulo);
+        configuraPacote();
 
-        mostraImagem(pacoteSaoPaulo);
+        mostraLocal(pacote);
 
-        mostraDias(pacoteSaoPaulo);
+        mostraImagem(pacote);
 
-        mostraPreco(pacoteSaoPaulo);
+        mostraDias(pacote);
 
-        mostraData(pacoteSaoPaulo);
+        mostraPreco(pacote);
+
+        mostraData(pacote);
 
         Button pagamento = findViewById(R.id.resumo_pacote_botao_realiza_pagamento);
         pagamento.setOnClickListener(view -> {
-            startActivity(new Intent(this, PagamentoActivity.class));
+            Intent intent = new Intent(this, PagamentoActivity.class);
+            intent.putExtra("pacoteSelecionado", pacote);
+            startActivity(intent);
         });
 
+    }
+
+    private void configuraPacote() {
+        Intent dados = getIntent();
+        if(dados.hasExtra("pacoteSelecionado")){
+            pacote = (Pacote) dados.getSerializableExtra("pacoteSelecionado");
+        } else {
+            pacote = new Pacote("São Paulo", "sao_paulo_sp", 2, new BigDecimal("243.99"));
+        }
     }
 
     private void mostraData(Pacote pacoteSaoPaulo) {
